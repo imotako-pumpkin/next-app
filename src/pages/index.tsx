@@ -1,9 +1,9 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import styles from '../styles/Home.module.css'
+import { Inter } from "@next/font/google";
+import Head from "next/head";
 
-const inter = Inter({ subsets: ['latin'] })
+import styles from "../styles/Home.module.css";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   return (
@@ -15,47 +15,23 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <div className={styles.description}>
-          <p>
-            Get started by editing&nbsp;
-            <code className={styles.code}>pages/index.tsx</code>
-          </p>
-          <div>
-            <a
-              href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              By{' '}
-              <Image
-                src="/vercel.svg"
-                alt="Vercel Logo"
-                className={styles.vercelLogo}
-                width={100}
-                height={24}
-                priority
-              />
-            </a>
-          </div>
-        </div>
-
         <div className={styles.center}>
-          <Image
+          {/* <Image
             className={styles.logo}
             src="/next.svg"
             alt="Next.js Logo"
             width={180}
             height={37}
             priority
-          />
+          /> */}
           <div className={styles.thirteen}>
-            <Image
+            {/* <Image
               src="/thirteen.svg"
               alt="13"
               width={40}
               height={31}
               priority
-            />
+            /> */}
           </div>
         </div>
 
@@ -69,6 +45,7 @@ export default function Home() {
             <h2 className={inter.className}>
               Docs <span>-&gt;</span>
             </h2>
+            <p className="flex font-bold text-red-700">fwfwfw</p>
             <p className={inter.className}>
               Find in-depth information about Next.js features and&nbsp;API.
             </p>
@@ -119,5 +96,5 @@ export default function Home() {
         </div>
       </main>
     </>
-  )
+  );
 }
