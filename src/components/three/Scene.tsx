@@ -8,7 +8,7 @@ export const Scene: FC<SceneProps> = (props) => {
   const { children } = props;
 
   return (
-    <Canvas className="!h-screen">
+    <Canvas className="!absolute !h-screen">
       <directionalLight intensity={0.75} />
       <ambientLight intensity={0.75} />
       {children}

@@ -1,10 +1,10 @@
 import "../styles/globals.css";
 
-import { Button, ChakraProvider, extendTheme, Stack } from "@chakra-ui/react";
+import { createTheme, ThemeProvider } from "@mui/material";
 import { Cloud } from "@react-three/drei";
-import { AnimatePresence } from "framer-motion";
 import type { AppProps } from "next/app";
 
+import { Layout } from "@/components/layout/Layout";
 import { Scene } from "@/components/three/Scene";
 
 export default function App({ Component, pageProps, router }: AppProps) {
@@ -13,7 +13,12 @@ export default function App({ Component, pageProps, router }: AppProps) {
       <Scene>
         <Cloud position={[4, -2, 0]} args={[3, 2]} speed={1} color={"red"} />
       </Scene>
-      <div className="absolute top-0 left-0 h-full w-full">
+      <ThemeProvider theme={theme}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ThemeProvider>
+      {/* <div className="absolute top-0 left-0 h-full w-full">
         <ChakraProvider theme={theme}>
           <Stack spacing={4} direction="row" align="center">
             <Button
@@ -49,21 +54,22 @@ export default function App({ Component, pageProps, router }: AppProps) {
             </AnimatePresence>
           )}
         </ChakraProvider>
-      </div>
+      </div> */}
     </>
   );
 }
 
-const theme = extendTheme({
-  styles: {
-    global: {
-      body: {
-        backgroundColor: "black",
-        color: "white",
-      },
-      html: {
-        height: "100%",
-      },
+const theme = createTheme({
+  palette: {
+    background: {
+      default: "#000000",
+    },
+    primary: {
+      main: "#fff",
+    },
+    secondary: {
+      // This is green.A700 as hex.
+      main: "#11cb5f",
     },
   },
 });
