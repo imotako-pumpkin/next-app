@@ -1,4 +1,3 @@
-import { Box, Stack, StackDivider, Text } from "@chakra-ui/react";
 import { Inter } from "@next/font/google";
 import Head from "next/head";
 
@@ -13,19 +12,6 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Stack divider={<StackDivider />} spacing="4">
-        <Box>
-          <Text
-            fontSize={"7xl"}
-            color={"blue.200"}
-            fontWeight={"bold"}
-            textAlign={"center"}
-            marginTop={400}
-          >
-            SAMPLE
-          </Text>
-        </Box>
-      </Stack>
     </>
   );
 }
