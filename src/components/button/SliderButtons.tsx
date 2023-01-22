@@ -1,10 +1,12 @@
 import { Button } from "@mui/material";
+import { useRouter } from "next/router";
 import { FC } from "react";
 
 import { useThreeContext } from "@/contexts/ThreeContext";
 
 export const SliderButtons: FC = () => {
   const { dispatch, state } = useThreeContext();
+  const router = useRouter();
 
   const { pageNo } = state;
   return (
@@ -16,6 +18,7 @@ export const SliderButtons: FC = () => {
             sx={{ borderRadius: 10 }}
             onClick={() => {
               dispatch({ type: "DECREMENT_PAGE_NO" });
+              router.push("/about");
             }}
           >
             ←
@@ -29,6 +32,7 @@ export const SliderButtons: FC = () => {
           sx={{ borderRadius: 10 }}
           onClick={() => {
             dispatch({ type: "INCREMENT_PAGE_NO" });
+            router.push("/");
           }}
         >
           →
