@@ -6,19 +6,21 @@ import type { AppProps } from "next/app";
 
 import { Layout } from "@/components/layout/Layout";
 import { Scene } from "@/components/three/Scene";
+import { ThreeProvider } from "@/contexts/ThreeContext";
 
 export default function App({ Component, pageProps, router }: AppProps) {
   return (
     <>
-      <Scene>
-        <Cloud position={[4, -2, 0]} args={[3, 2]} speed={1} color={"red"} />
-      </Scene>
-      <ThemeProvider theme={theme}>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </ThemeProvider>
-      {/* <div className="absolute top-0 left-0 h-full w-full">
+      <ThreeProvider>
+        <Scene>
+          <Cloud position={[4, -2, 0]} args={[3, 2]} speed={1} color={"red"} />
+        </Scene>
+        <ThemeProvider theme={theme}>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </ThemeProvider>
+        {/* <div className="absolute top-0 left-0 h-full w-full">
         <ChakraProvider theme={theme}>
           <Stack spacing={4} direction="row" align="center">
             <Button
@@ -54,7 +56,8 @@ export default function App({ Component, pageProps, router }: AppProps) {
             </AnimatePresence>
           )}
         </ChakraProvider>
-      </div> */}
+      </div> */}{" "}
+      </ThreeProvider>
     </>
   );
 }

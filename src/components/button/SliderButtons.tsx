@@ -1,10 +1,12 @@
 import { Button } from "@mui/material";
 import { FC } from "react";
 
-import { usePageSlider } from "@/hooks/usePageSlider";
+import { useThreeContext } from "@/contexts/ThreeContext";
 
 export const SliderButtons: FC = () => {
-  const { pageNo, setPageNo } = usePageSlider();
+  const { dispatch, state } = useThreeContext();
+
+  const { pageNo } = state;
   return (
     <>
       {pageNo > 1 && (
@@ -13,7 +15,7 @@ export const SliderButtons: FC = () => {
             variant="outlined"
             sx={{ borderRadius: 10 }}
             onClick={() => {
-              setPageNo(pageNo - 1);
+              dispatch({ type: "DECREMENT_PAGE_NO" });
             }}
           >
             ←
@@ -26,7 +28,7 @@ export const SliderButtons: FC = () => {
           variant="outlined"
           sx={{ borderRadius: 10 }}
           onClick={() => {
-            setPageNo(pageNo + 1);
+            dispatch({ type: "INCREMENT_PAGE_NO" });
           }}
         >
           →
