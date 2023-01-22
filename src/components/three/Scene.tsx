@@ -25,7 +25,7 @@ export const Scene: FC<SceneProps> = (props) => {
 function Sphere() {
   const { state } = useThreeContext();
 
-  const { pageNo } = state;
+  const { sliderNo } = state;
 
   const ref = useRef<Mesh>(null);
 
@@ -39,7 +39,7 @@ function Sphere() {
     if (ref.current) {
       ref.current.position.y = Math.sin((state.clock.getElapsedTime() / 2) * 3);
     }
-    const n = pageNo * 10;
+    const n = sliderNo * 10;
     state.camera.position.lerp(new Vector3(10, 0, 0 + n), 0.03);
     // state.camera.lookAt(0, 0, 0);
   });

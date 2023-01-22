@@ -4,21 +4,23 @@ import { FC } from "react";
 
 import { useThreeContext } from "@/contexts/ThreeContext";
 
+const route = ["about", "information"];
+
 export const SliderButtons: FC = () => {
   const { dispatch, state } = useThreeContext();
   const router = useRouter();
 
-  const { pageNo } = state;
+  const { sliderNo } = state;
   return (
     <>
-      {pageNo > 1 && (
+      {sliderNo > 1 && (
         <div className="fixed top-1/3 left-12">
           <Button
             variant="outlined"
             sx={{ borderRadius: 10 }}
             onClick={() => {
               dispatch({ type: "DECREMENT_PAGE_NO" });
-              router.push("/about");
+              router.push(`/${route[sliderNo]}`);
             }}
           >
             ←
@@ -32,7 +34,7 @@ export const SliderButtons: FC = () => {
           sx={{ borderRadius: 10 }}
           onClick={() => {
             dispatch({ type: "INCREMENT_PAGE_NO" });
-            router.push("/");
+            router.push(`/${route[sliderNo + 1]}`);
           }}
         >
           →

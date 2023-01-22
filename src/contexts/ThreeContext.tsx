@@ -7,7 +7,7 @@ import {
   useReducer,
 } from "react";
 
-type DataStore = { pageNo: number };
+type DataStore = { sliderNo: number };
 
 type ReducerAction = { type: string };
 
@@ -16,15 +16,15 @@ type DataStoreContext = { dispatch: Dispatch<ReducerAction>; state: DataStore };
 const reducer = (state: DataStore, action: ReducerAction) => {
   switch (action.type) {
     case "INCREMENT_PAGE_NO":
-      return { ...state, pageNo: state.pageNo + 1 };
+      return { ...state, sliderNo: state.sliderNo + 1 };
     case "DECREMENT_PAGE_NO":
-      return { ...state, pageNo: state.pageNo - 1 };
+      return { ...state, sliderNo: state.sliderNo - 1 };
     default:
       return state;
   }
 };
 
-const initialState = { pageNo: 1 };
+const initialState = { sliderNo: 0 };
 
 const ThreeContext = createContext({} as DataStoreContext);
 
