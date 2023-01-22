@@ -10,7 +10,9 @@ export const HeadLayout: FC<HeadLayoutProps> = (props) => {
         sx={{ left: "50%", maxWidth: "40%", position: "fixed", top: "25%" }}
       >
         {props.children}
-        <Button variant="outlined">Outlined</Button>
+        <Button variant="outlined" sx={{ marginTop: "10%" }}>
+          Outlined
+        </Button>
       </Container>
     </>
   );
