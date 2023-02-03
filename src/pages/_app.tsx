@@ -5,6 +5,7 @@ import { Cloud } from "@react-three/drei";
 import type { AppProps } from "next/app";
 
 import { Layout } from "@/components/layout/Layout";
+import { TopField } from "@/components/three/models/TopField";
 import { Scene } from "@/components/three/Scene";
 import { ThreeProvider } from "@/contexts/ThreeContext";
 
@@ -13,7 +14,18 @@ export default function App({ Component, pageProps, router }: AppProps) {
     <>
       <ThreeProvider>
         <Scene>
-          <Cloud position={[4, -2, 0]} args={[3, 2]} speed={1} color={"red"} />
+          {router.pathname === "/" ? (
+            <>
+              <TopField />
+            </>
+          ) : (
+            <Cloud
+              position={[4, -2, 0]}
+              args={[3, 2]}
+              speed={1}
+              color={"blue"}
+            />
+          )}
         </Scene>
         <ThemeProvider theme={theme}>
           <Layout>
