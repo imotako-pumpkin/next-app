@@ -2,7 +2,10 @@ import { Vector3 } from "three";
 
 import { Human } from "@/components/three/models/Human";
 import { LinkZone } from "@/components/three/models/LinkZone";
-import { TopFieldProvider } from "@/contexts/TopFieldContext";
+import {
+  initHumanCoordinate,
+  TopFieldProvider,
+} from "@/contexts/TopFieldContext";
 
 export const TopField = () => {
   return (
@@ -23,7 +26,7 @@ export const TopField = () => {
           color="white"
           position={infoPosition}
         />
-        <Human position={new Vector3(0, 1.5, 0)} />
+        <Human position={initHumanCoordinate} />
       </TopFieldProvider>
     </>
   );

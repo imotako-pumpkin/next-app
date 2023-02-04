@@ -23,7 +23,9 @@ const reducer = (state: DataStore, action: ReducerAction) => {
   }
 };
 
-const initialState = { humanCoordinate: new Vector3(0, 1.5, 0) };
+export const initHumanCoordinate = new Vector3(0, 1.5, 0);
+
+const initialState = { humanCoordinate: initHumanCoordinate };
 
 const TopFieldContext = createContext({} as DataStoreContext);
 
