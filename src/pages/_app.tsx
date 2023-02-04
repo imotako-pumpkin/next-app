@@ -1,7 +1,6 @@
 import "../styles/globals.css";
 
 import { createTheme, ThemeProvider } from "@mui/material";
-import { Cloud } from "@react-three/drei";
 import type { AppProps } from "next/app";
 
 import { Layout } from "@/components/layout/Layout";
@@ -14,18 +13,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
     <>
       <ThreeProvider>
         <Scene>
-          {router.pathname === "/" ? (
-            <>
-              <TopField />
-            </>
-          ) : (
-            <Cloud
-              position={[4, -2, 0]}
-              args={[3, 2]}
-              speed={1}
-              color={"blue"}
-            />
-          )}
+          <TopField />
         </Scene>
         <ThemeProvider theme={theme}>
           <Layout>

@@ -1,3 +1,4 @@
+import { Cloud } from "@react-three/drei";
 import { Vector3 } from "three";
 
 import { Human } from "@/components/three/models/Human";
@@ -27,6 +28,7 @@ export const TopField = () => {
           position={infoPosition}
         />
         <Human position={initHumanCoordinate} />
+        <Cloud position={[-20, 0, -5]} args={[5, 5]} speed={10} color={"red"} />
       </TopFieldProvider>
     </>
   );
