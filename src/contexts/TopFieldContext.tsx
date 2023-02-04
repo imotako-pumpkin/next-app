@@ -10,14 +10,14 @@ import { Vector3 } from "three";
 
 type DataStore = { humanCoordinate: Vector3 };
 
-type ReducerAction = { type: string };
+type ReducerAction = { payload: any; type: string };
 
 type DataStoreContext = { dispatch: Dispatch<ReducerAction>; state: DataStore };
 
 const reducer = (state: DataStore, action: ReducerAction) => {
   switch (action.type) {
     case "UPDATE_HUMAN_COORDINATE":
-      return { ...state, humanCoordinate: state.humanCoordinate };
+      return { ...state, humanCoordinate: action.payload };
     default:
       return state;
   }
