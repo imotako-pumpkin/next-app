@@ -9,8 +9,9 @@ export const Scene: FC<SceneProps> = (props) => {
 
   return (
     <Canvas className="!absolute !h-screen">
-      <PerspectiveCamera makeDefault position={[0, 1, 5]} />
+      <PerspectiveCamera makeDefault position={[0, 1, 50]} />
       <OrbitControls
+        enableRotate={false}
         minPolarAngle={(1 / 3) * Math.PI}
         maxPolarAngle={(1 / 3.5) * Math.PI}
       />

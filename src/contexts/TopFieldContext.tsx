@@ -6,8 +6,9 @@ import {
   useContext,
   useReducer,
 } from "react";
+import { Vector3 } from "three";
 
-type DataStore = { sliderNo: number };
+type DataStore = { humanCoordinate: Vector3 };
 
 type ReducerAction = { type: string };
 
@@ -15,28 +16,26 @@ type DataStoreContext = { dispatch: Dispatch<ReducerAction>; state: DataStore };
 
 const reducer = (state: DataStore, action: ReducerAction) => {
   switch (action.type) {
-    case "INCREMENT_PAGE_NO":
-      return { ...state, sliderNo: state.sliderNo + 1 };
-    case "DECREMENT_PAGE_NO":
-      return { ...state, sliderNo: state.sliderNo - 1 };
+    case "UPDATE_HUMAN_COORDINATE":
+      return { ...state, humanCoordinate: state.humanCoordinate };
     default:
       return state;
   }
 };
 
-const initialState = { sliderNo: 0 };
+const initialState = { humanCoordinate: new Vector3(0, 1.5, 0) };
 
-const ThreeContext = createContext({} as DataStoreContext);
+const TopFieldContext = createContext({} as DataStoreContext);
 
-type ThreeProviderProps = { children: ReactNode };
+type TopFieldProviderProps = { children: ReactNode };
 
-export const ThreeProvider: FC<ThreeProviderProps> = (props) => {
+export const TopFieldProvider: FC<TopFieldProviderProps> = (props) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   return (
-    <ThreeContext.Provider value={{ dispatch, state }}>
+    <TopFieldContext.Provider value={{ dispatch, state }}>
       {props.children}
-    </ThreeContext.Provider>
+    </TopFieldContext.Provider>
   );
 };
 
-export const useThreeContext = () => useContext(ThreeContext);
+export const useTopFieldContext = () => useContext(TopFieldContext);
