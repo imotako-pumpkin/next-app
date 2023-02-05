@@ -15,7 +15,9 @@ export const Human: FC<HumanProps> = (props) => {
   const keyMap = useKeyboard();
   const { dispatch, state } = useTopFieldContext();
 
-  const getIntersections = useForwardRaycast(ref);
+  const getIntersections = useForwardRaycast(
+    ref.current?.position ?? new Vector3()
+  );
 
   useFrame((x, delta) => {
     const times = delta * 10;

@@ -2,6 +2,7 @@ import { FC, useRef } from "react";
 import { Mesh, Vector3 } from "three";
 
 import { useTopFieldContext } from "@/contexts/TopFieldContext";
+import { useForwardRaycast } from "@/hooks/useForwardRaycast";
 
 type LinkZoneProps = {
   name: string;
@@ -12,6 +13,7 @@ type LinkZoneProps = {
 export const links = [
   { name: "about", color: "red", position: new Vector3(10, 0, 10) },
   { name: "information", color: "white", position: new Vector3(-10, 0, -10) },
+  { name: "contact", color: "blue", position: new Vector3(-10, 0, 10) },
 ];
 
 export const LinkZones: FC = () => {
@@ -28,6 +30,8 @@ const LinkZone: FC<LinkZoneProps> = (props) => {
   const { name, color, position } = props;
   const ref = useRef<Mesh>(null);
   const { dispatch, state } = useTopFieldContext();
+
+  const getIntersections = useForwardRaycast(state.humanCoordinate);
 
   return (
     <>
