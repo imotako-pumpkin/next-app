@@ -1,4 +1,5 @@
-import { FC, useRef } from "react";
+import { useFrame } from "@react-three/fiber";
+import { FC, useRef, useState } from "react";
 import { Mesh, Vector3 } from "three";
 
 import { useTopFieldContext } from "@/contexts/TopFieldContext";
@@ -33,6 +34,14 @@ const LinkZone: FC<LinkZoneProps> = (props) => {
 
   const getIntersections = useForwardRaycast(state.humanCoordinate);
 
+  const [hovered, setHovered] = useState(false);
+
+  useFrame(() => {
+    const isCross = getIntersections().some((x) => x.object.name === name);
+
+    setHovered(isCross);
+  });
+
   return (
     <>
       <mesh
@@ -45,14 +54,14 @@ const LinkZone: FC<LinkZoneProps> = (props) => {
           if (ref.current) {
             const { x, z } = ref.current.position;
             dispatch({
-              payload: new Vector3(x, 1.5, z),
+              payload: new Vector3(x, 0.5, z),
               type: "UPDATE_HUMAN_COORDINATE",
             });
           }
         }}
       >
-        <planeGeometry args={[10, 10]} />
-        <meshStandardMaterial color={color} />
+        <planeGeometry args={[5, 5]} />
+        <meshStandardMaterial color={hovered ? "yellow" : color} />
       </mesh>
     </>
   );

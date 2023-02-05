@@ -23,7 +23,7 @@ const reducer = (state: DataStore, action: ReducerAction) => {
   }
 };
 
-export const initHumanCoordinate = new Vector3(0, 1.5, 0);
+export const initHumanCoordinate = new Vector3(0, 0.5, 0);
 
 const initialState = { humanCoordinate: initHumanCoordinate };
 
