@@ -7,13 +7,28 @@ type LinkZoneProps = {
   name: string;
   color: string;
   position?: Vector3;
-  size: { height: number; width: number };
 };
 
-export const LinkZone: FC<LinkZoneProps> = (props) => {
-  const { name, color, position, size } = props;
+export const links = [
+  { name: "about", color: "red", position: new Vector3(10, 0, 10) },
+  { name: "information", color: "white", position: new Vector3(-10, 0, -10) },
+];
+
+export const LinkZones: FC = () => {
+  return (
+    <>
+      {links.map((link, idx) => {
+        return <LinkZone key={idx} {...link} />;
+      })}
+    </>
+  );
+};
+
+const LinkZone: FC<LinkZoneProps> = (props) => {
+  const { name, color, position } = props;
   const ref = useRef<Mesh>(null);
   const { dispatch, state } = useTopFieldContext();
+
   return (
     <>
       <mesh
@@ -32,7 +47,7 @@ export const LinkZone: FC<LinkZoneProps> = (props) => {
           }
         }}
       >
-        <planeGeometry args={[size.width, size.height]} />
+        <planeGeometry args={[10, 10]} />
         <meshStandardMaterial color={color} />
       </mesh>
     </>

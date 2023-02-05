@@ -15,6 +15,8 @@ export const Human: FC<HumanProps> = (props) => {
   const keyMap = useKeyboard();
   const { dispatch, state } = useTopFieldContext();
 
+  const getIntersections = useForwardRaycast(ref);
+
   useFrame((x, delta) => {
     const times = delta * 10;
     if (ref.current) {
@@ -27,10 +29,6 @@ export const Human: FC<HumanProps> = (props) => {
       !keyMap["Space"] && position.y > 1.5 && (position.y -= 0.2);
       if (!_.isEqual(state.humanCoordinate, position)) {
         dispatch({ payload: position, type: "UPDATE_HUMAN_COORDINATE" });
-      }
-      const intersections = getIntersections();
-      if (intersections.length > 0) {
-        console.log("交差：" + intersections.length);
       }
     }
   });
@@ -49,16 +47,24 @@ export const Human: FC<HumanProps> = (props) => {
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
       if (event.key === "Enter") {
-        const { x, y, z } = state.humanCoordinate;
-        if (5 <= x && x <= 15 && 5 <= z && z <= 15) {
-          router.push("./about");
-        }
-        if (-15 <= x && x <= -5 && -15 <= z && z <= -5) {
+        const intersections = getIntersections();
+
+        const crossInformation = intersections.some(
+          (x) => x.object.name === "information"
+        );
+
+        if (crossInformation) {
           router.push("./information");
+        }
+
+        const crossAbout = intersections.some((x) => x.object.name === "about");
+
+        if (crossAbout) {
+          router.push("./about");
         }
       }
     },
-    [router, state]
+    [getIntersections, router]
   );
 
   useEffect(() => {
@@ -67,8 +73,6 @@ export const Human: FC<HumanProps> = (props) => {
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [handleKeyDown]);
-
-  const getIntersections = useForwardRaycast(ref);
 
   return (
     <>
