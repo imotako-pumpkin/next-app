@@ -5,6 +5,7 @@ import { FC, useCallback, useEffect, useRef } from "react";
 import { Mesh, Vector3 } from "three";
 
 import { useTopFieldContext } from "@/contexts/TopFieldContext";
+import { useForwardRaycast } from "@/hooks/useForwardRaycast";
 import useKeyboard from "@/hooks/useKeyboard";
 
 type HumanProps = { position: Vector3 };
@@ -26,6 +27,10 @@ export const Human: FC<HumanProps> = (props) => {
       !keyMap["Space"] && position.y > 1.5 && (position.y -= 0.2);
       if (!_.isEqual(state.humanCoordinate, position)) {
         dispatch({ payload: position, type: "UPDATE_HUMAN_COORDINATE" });
+      }
+      const intersections = getIntersections();
+      if (intersections.length > 0) {
+        console.log("交差：" + intersections.length);
       }
     }
   });
@@ -63,10 +68,14 @@ export const Human: FC<HumanProps> = (props) => {
     };
   }, [handleKeyDown]);
 
+  const getIntersections = useForwardRaycast(ref);
+
   return (
-    <mesh ref={ref} {...props}>
-      <sphereGeometry args={[0.5, 32, 32]} />
-      <meshStandardMaterial color="silver" metalness={0.8} roughness={0.5} />
-    </mesh>
+    <>
+      <mesh ref={ref} {...props}>
+        <sphereGeometry args={[0.5, 32, 32]} />
+        <meshStandardMaterial color="silver" metalness={0.8} roughness={0.5} />
+      </mesh>
+    </>
   );
 };

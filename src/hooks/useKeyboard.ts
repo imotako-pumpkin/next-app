@@ -1,19 +1,19 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef } from "react";
 
 export default function useKeyboard() {
-  const keyMap = useRef<{ [key in string]: boolean }>({})
+  const keyMap = useRef<{ [key in string]: boolean }>({});
 
   useEffect(() => {
     const onDocumentKey = (e: KeyboardEvent) => {
-      keyMap.current[e.code] = e.type === 'keydown'
-    }
-    document.addEventListener('keydown', onDocumentKey)
-    document.addEventListener('keyup', onDocumentKey)
+      keyMap.current[e.code] = e.type === "keydown";
+    };
+    document.addEventListener("keydown", onDocumentKey);
+    document.addEventListener("keyup", onDocumentKey);
     return () => {
-      document.removeEventListener('keydown', onDocumentKey)
-      document.removeEventListener('keyup', onDocumentKey)
-    }
-  })
+      document.removeEventListener("keydown", onDocumentKey);
+      document.removeEventListener("keyup", onDocumentKey);
+    };
+  });
 
-  return keyMap.current
+  return keyMap.current;
 }

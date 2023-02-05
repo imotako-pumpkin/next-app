@@ -21,10 +21,12 @@ export const TopField = () => {
           size={{ height: 10, width: 10 }}
           color="red"
           position={aboutPosition}
+          name="about"
         />
         <LinkZone
           size={{ height: 10, width: 10 }}
           color="white"
+          name="information"
           position={infoPosition}
         />
         <Human position={initHumanCoordinate} />
