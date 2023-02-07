@@ -30,19 +30,37 @@ export const Human: FC<HumanProps> = (props) => {
       keyMap["Space"] && position.y < 5 && (position.y += 0.5);
       !keyMap["Space"] && position.y > 1.5 && (position.y -= 0.2);
       if (!_.isEqual(state.humanCoordinate, position)) {
-        dispatch({ payload: position, type: "UPDATE_HUMAN_COORDINATE" });
+        const diffX = state.humanCoordinate.x - position.x;
+        const absX = Math.abs(diffX);
+        if (absX < 0.3) {
+          position.x = state.humanCoordinate.x;
+        } else {
+          if (diffX < 0) position.x -= 3 * times;
+          if (diffX > 0) position.x += 3 * times;
+        }
+        const diffY = state.humanCoordinate.y - position.y;
+        const absY = Math.abs(diffY);
+        if (absY < 0.3) {
+          position.y = state.humanCoordinate.y;
+        } else {
+          if (diffY < 0) position.y -= 3 * times;
+          if (diffY > 0) position.y += 3 * times;
+        }
+        const diffZ = state.humanCoordinate.z - position.z;
+        const absZ = Math.abs(diffZ);
+        if (absZ < 0.3) {
+          position.z = state.humanCoordinate.z;
+        } else {
+          if (diffZ < 0) position.z -= 3 * times;
+          if (diffZ > 0) position.z += 3 * times;
+        }
+
+        if (_.isEqual(position, state.humanCoordinate)) {
+          dispatch({ payload: position, type: "UPDATE_HUMAN_COORDINATE" });
+        }
       }
     }
   });
-
-  useEffect(() => {
-    if (ref.current) {
-      const position = ref.current.position;
-      position.x = state.humanCoordinate.x;
-      position.y = state.humanCoordinate.y;
-      position.z = state.humanCoordinate.z;
-    }
-  }, [state.humanCoordinate]);
 
   const router = useRouter();
 
