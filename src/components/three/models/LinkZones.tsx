@@ -1,6 +1,8 @@
+import { Center, Text3D } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { FC, useRef, useState } from "react";
 import { Mesh, Vector3 } from "three";
+import helvetiker_bold from "three/examples/fonts/helvetiker_bold.typeface.json";
 
 import { useTopFieldContext } from "@/contexts/TopFieldContext";
 import { useForwardRaycast } from "@/hooks/useForwardRaycast";
@@ -63,6 +65,19 @@ const LinkZone: FC<LinkZoneProps> = (props) => {
         <planeGeometry args={[5, 5]} />
         <meshStandardMaterial color={hovered ? "yellow" : color} />
       </mesh>
+      <Center position={position} top>
+        <Text3D
+          font={helvetiker_bold as unknown as string}
+          rotation={[
+            hovered ? 0 : -0.5 * Math.PI,
+            hovered ? (1 / 6) * Math.PI : 0,
+            hovered ? 0 : (1 / 6) * Math.PI,
+          ]}
+        >
+          {name}
+          <meshNormalMaterial />
+        </Text3D>
+      </Center>
     </>
   );
 };
